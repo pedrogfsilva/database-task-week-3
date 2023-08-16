@@ -24,6 +24,37 @@ db.connect((err) => {
     console.log("Connected to database");
 });
 
+app.post("/task", (request, response) => {
+    try {
+        const { name, description, hours } = request.body;
+        const sql = `INSERT INTO task(name, description, hours) VALUES ('${name}', '${description}', '${hours}')`;
+        db.query(sql, (err, result) => {
+            if (err) {
+                throw err;
+            }
+            console.log("Task added");
+            response.send("Task added");
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get("/task", (request, response) => {
+    try {
+        const sql = "SELECT * FROM task";
+        db.query(sql, (err, result) => {
+            if (err) {
+                throw err;
+            }
+            console.log("Tasks retrieved");
+            response.send(result);
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
