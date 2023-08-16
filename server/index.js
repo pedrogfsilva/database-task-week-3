@@ -56,6 +56,37 @@ app.get("/task", (request, response) => {
     }
 });
 
+app.post("/employees", (request, response) => {
+    try {
+        const { name, adress } = request.body;
+        const sql = `INSERT INTO EMPLOYEES(NAME, ADDRESS) VALUES ('${name}', '${adress}')`;
+        db.query(sql, (err, result) => {
+            if (err) {
+                throw err;
+            }
+            console.log("Employee added");
+            response.send("Employee added");
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get("/employees", (request, response) => {
+    try {
+        const sql = "SELECT * FROM EMPLOYEES";
+        db.query(sql, (err, result) => {
+            if (err) {
+                throw err;
+            }
+            console.log("Employees retrieved");
+            response.send(result);
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
