@@ -22,6 +22,7 @@ db.connect((err) => {
         throw err;
     }
     console.log("Connected to database");
+    db.query("USE week3;");
 });
 
 app.post("/task", (request, response) => {
