@@ -58,8 +58,8 @@ app.get("/task", (request, response) => {
 
 app.post("/employees", (request, response) => {
     try {
-        const { name, adress } = request.body;
-        const sql = `INSERT INTO EMPLOYEES(NAME, ADDRESS) VALUES ('${name}', '${adress}')`;
+        const { name, address } = request.body;
+        const sql = `INSERT INTO EMPLOYEES(NAME, ADDRESS) VALUES ('${name}', '${address}')`;
         db.query(sql, (err, result) => {
             if (err) {
                 throw err;
